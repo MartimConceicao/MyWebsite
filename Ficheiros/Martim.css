@@ -26,13 +26,15 @@ body {
 /* NOVA COR: Cinzento Titânio / Aço Inoxidável Escuro */
 .fridge-door {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    /* Um gradiente cinzento metálico mais realista */
     background: linear-gradient(145deg, #6c737c 0%, #4d535b 40%, #31363c 100%);
-    /* O friso lateral também fica num cinza mais escuro em vez de preto */
     border-right: 15px solid #23272c; 
     z-index: 2; padding: 40px 60px;
     display: flex; flex-direction: column; justify-content: space-between;
-    transform-origin: left center; transition: transform 0.1s ease-out; 
+    transform-origin: left center; 
+    
+    /* MAGIA AQUI: Aumentamos para 0.8s para a porta parecer "pesada" e abrir devagar */
+    transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); 
+    
     box-shadow: inset 5px 0 15px rgba(255,255,255,0.1), 15px 0 50px rgba(0,0,0,0.6);
     pointer-events: auto; 
 }
@@ -45,8 +47,6 @@ body {
     border-radius: 12px; box-shadow: -8px 5px 15px rgba(0,0,0,0.4), inset 2px 0 5px rgba(255,255,255,0.4);
     z-index: 5;
 }
-
-
 
 .fridge-darkness {
     position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: #050505;
@@ -92,10 +92,47 @@ body.is-lit .fridge-light-glow { opacity: 1; }
 /* 2. O ESPAÇO DE SCROLL */
 .fridge-content { 
     position: relative; z-index: 5; 
-    width: 76vw; /* Exatamente a largura da parede do fundo */
+    width: 76vw; 
     margin: 0 auto; 
-    padding-top: 15vh; padding-bottom: 25vh;
+    
+    /* Voltamos a pôr o teto no topo do frigorífico! */
+    padding-top: 35px; 
+    padding-bottom: 25vh;
     display: flex; flex-direction: column;
+}
+
+/* -------------------------
+   TETO DO FRIGORÍFICO (LUZ E VENTILAÇÃO)
+-------------------------- */
+.fridge-top-panel {
+    width: 100%; max-width: 700px;
+    
+    /* Dá 250px de espaço entre o teto e a prateleira Início para a câmara enquadrar bem */
+    margin: 0 auto 80px auto; 
+    
+    background: #f8f9fa;
+    border: 2px solid rgba(255,255,255,1);
+    border-radius: 12px;
+    padding: 20px 40px;
+    display: flex; justify-content: space-between; align-items: center;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.05), inset 0 -4px 10px rgba(0,0,0,0.08);
+    
+    transform: perspective(1000px) rotateX(20deg);
+    transform-origin: top center;
+}
+
+.fridge-led-light {
+    width: 60%; height: 60px;
+    background: #ffffff;
+    border-radius: 8px;
+    /* O foco de luz principal que simula a iluminação do teu frigorífico */
+    box-shadow: 0 0 60px rgba(255, 250, 220, 0.9), 0 0 120px rgba(255, 255, 255, 0.7), inset 0 0 20px rgba(255, 250, 200, 1);
+}
+
+.fridge-vents {
+    width: 12%; height: 40px;
+    /* Efeito de grelha de ventilação 3D feito apenas com listras de CSS */
+    background: repeating-linear-gradient(180deg, transparent, transparent 5px, rgba(0,0,0,0.15) 5px, rgba(0,0,0,0.15) 9px);
 }
 
 .shelf {
@@ -111,13 +148,17 @@ body.is-lit .fridge-light-glow { opacity: 1; }
 }
 
 /* 3. A PRATELEIRA DE VIDRO (Cruza a linha vertical) */
+/* 3. A PRATELEIRA DE VIDRO (Cruza a linha vertical) */
 .shelf::after {
     content: '';
     position: absolute;
     bottom: 0; 
-    /* Cresce para os lados, invadindo as paredes laterais tal como no teu desenho */
-    left: -15%; 
-    width: 130%; 
+    
+    /* ALTERAÇÕES AQUI: 
+       Colocamos a largura a 100% para ter a largura exata da parede do fundo,
+       e o left a 0 para não fugir para os lados. */
+    left: 5%; 
+    width: 90%;
     height: 200px; 
     
     background: linear-gradient(to bottom, rgba(255,255,255,0.95) 0%, rgba(200,220,240,0.3) 100%);
@@ -152,6 +193,70 @@ body.is-lit .fridge-light-glow { opacity: 1; }
 
 .content-item h2 { font-size: 2.5rem; margin-bottom: 15px; color: #111; letter-spacing: -0.5px; }
 .content-item p { font-size: 1.15rem; color: #444; line-height: 1.6; }
+
+/* -------------------------
+   CAIXAS INTERATIVAS (ACRÍLICOS)
+-------------------------- */
+.shelf-containers {
+    display: flex; gap: 15px;
+    width: 100%; max-width: 850px;
+    position: relative; z-index: 2; 
+    transform: translateY(-20px);
+}
+
+.food-box {
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.9); border-radius: 10px;
+    padding: 25px 20px;
+    box-shadow: 0 15px 25px rgba(0,0,0,0.1), inset 0 0 15px rgba(255,255,255,0.6);
+    cursor: pointer;
+    
+    /* FIXO: Permite à caixa encolher até desaparecer na animação */
+    width: 33.33%; 
+    height: 120px; 
+    min-width: 0; 
+    
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    overflow: hidden;
+    transition: background 0.2s, box-shadow 0.2s;
+    position: relative; /* Para segurar o botão de fechar */
+}
+
+.food-box:hover {
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 20px 30px rgba(0,0,0,0.15), inset 0 0 20px rgba(255,255,255,0.9);
+}
+
+.food-box.expanded {
+    cursor: default; /* Quando está aberta, tira a mão de pointer */
+}
+
+.box-title {
+    font-size: 1.4rem; color: #111; margin: 0; 
+    text-align: center; white-space: nowrap; transition: color 0.2s;
+}
+
+.box-hidden {
+    opacity: 0; height: 0; margin-top: 0;
+    color: #444; font-size: 1.05rem; line-height: 1.6; text-align: center;
+}
+
+/* NOVO: Botão de fechar (X) gerado via JS */
+.close-btn {
+    position: absolute;
+    top: 15px; right: 15px;
+    font-size: 26px; font-weight: bold;
+    color: #111; cursor: pointer;
+    opacity: 0; pointer-events: none; /* Invisível inicialmente */
+    line-height: 1;
+    width: 30px; height: 30px;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(0,0,0,0.05); border-radius: 50%;
+    transition: background 0.2s;
+}
+.close-btn:hover { background: rgba(0,0,0,0.15); }
+.food-box.expanded .close-btn { pointer-events: auto; }
 
 /* acaba aqui o css do interior do frigorifico   */
 
