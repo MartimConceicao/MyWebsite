@@ -2,11 +2,59 @@
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
-    <!-- É esta linha que faz a magia do redirecionamento instantâneo -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Redirecionamento -->
     <meta http-equiv="refresh" content="0; url=Ficheiros/Martim.html">
-    <title>A redirecionar...</title>
+    <title>A carregar...</title>
+    
+    <style>
+        /* Estilo da página inteira */
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #121212; /* Fundo escuro e moderno */
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* O círculo a rodar (Spinner) */
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #333; /* Cor do anel de fundo */
+            border-top: 5px solid #007bff; /* Cor da parte que roda (azul) */
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        /* A animação de rotação */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Estilo do texto */
+        p {
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            margin: 0;
+            animation: pulse 1.5s infinite alternate; /* Faz o texto piscar suavemente */
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            100% { opacity: 1; }
+        }
+    </style>
 </head>
 <body>
-    <p>A redirecionar para o site... Se não fores redirecionado automaticamente, <a href="Ficheiros/Martim.html">clica aqui</a>.</p>
+    <!-- A animação e o texto -->
+    <div class="spinner"></div>
+    <p>A carregar o portefólio...</p>
 </body>
 </html>
