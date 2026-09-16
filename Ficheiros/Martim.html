@@ -1,31 +1,33 @@
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Martim Conceição |   Software Engineer</title>
+    <title>Martim Conceição | Software Engineer</title>
 
     <link rel="icon" type="image/png" href="../Anexos/favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
 
     <link rel="stylesheet" href="Martim.css">
 </head>
+
 <body>
 
-   <div class="fridge-inside" id="inside">
-        
-        <!-- A Parede do fundo que vai crescer até lá abaixo -->
+    <div class="fridge-inside" id="inside">
         <div class="fridge-back-wall"></div>
-        
+
         <div class="fridge-darkness"></div>
         <div class="fridge-light-glow"></div>
-        
+
         <!-- O CONTEÚDO SCROLLÁVEL -->
+        <div class="fridge-content">
             <!-- Teto do frigorífico (Painel de Luz e Ventilação) -->
             <div class="fridge-top-panel">
                 <div class="fridge-vents"></div>
@@ -33,80 +35,184 @@
                 <div class="fridge-vents"></div>
             </div>
 
-            <!-- Prateleira 1: INÍCIO --> 
+            <!-- Prateleira 1: INÍCIO -->
             <section id="home" class="shelf">
                 <div class="shelf-containers">
                     <div class="food-box">
-                        <h3 class="box-title">Quem sou</h3>
-                        <div class="box-hidden">Sou um rapaz de 21 anos com 3 grandes interesses, tecnologia, musica e desportos motorizados. Estas 3
-                            paixões não vieram de hoje,mas sim de uma vida inteira a aprender com elas. Desde miúdo que desmonto coisas e tento montar de volta,
-                            umas com mais sucesso que as outras 
+                        <h3 class="box-title" data-i18n="home_t1">Quem sou</h3>
+                        <div class="box-hidden" data-i18n="home_d1">Descrição de quem sou.</div>
+                    </div>
+                    <div class="food-box">
+                        <h3 class="box-title" data-i18n="home_t2">Passatempos</h3>
+
+                        <div class="polaroid-gigante card-1">
+                            <img src="../Anexos/Foto_Carro.jpg" alt="Carros">
+                        </div>
+                        <div class="polaroid-gigante card-2">
+                            <img src="../Anexos/Foto_Palco.png" alt="Música">
+                        </div>
+
+                        <div class="box-hidden">
+                            <p class="texto-passatempos" data-i18n="home_d2">Para além da tecnologia </p>
                         </div>
                     </div>
                     <div class="food-box">
-                        <h3 class="box-title">Passatempos</h3>
-                        <div class="box-hidden">Juntar código limpo a um design arrojado, garantindo performance e acessibilidade.</div>
-                    </div>
-                    <div class="food-box">
-                        <h3 class="box-title">Skills</h3>
-                        <div class="box-hidden">Especializado em Frontend interativo (HTML, CSS, JS e frameworks modernas).</div>
+                        <h3 class="box-title" data-i18n="home_t3">Skills</h3>
+                        <div class="box-hidden" data-i18n="home_d3"> hard skills e soft skills.</div>
                     </div>
                 </div>
             </section>
-            
-            <!-- Prateleira 3: SOBRE MIM -->
-            <section id="about" class="shelf">
-                <div class="shelf-containers">
-                    <div class="food-box">
-                        <h3 class="box-title">SoundMarket</h3>
-                        <div class="box-hidden">Quando não estou a programar, dedico-me à fotografia e ao design 3D.</div>
-                    </div>
-                    <div class="food-box">
-                        <h3 class="box-title">UnityBJJ</h3>
-                        <div class="box-hidden">Trabalho em equipa, resolução criativa de problemas e comunicação clara.</div>
-                    </div>
-                    <div class="food-box">
-                        <h3 class="box-title">VulnerAI</h3>
-                        <div class="box-hidden">JavaScript avançado, CSS Animations, React, e controlo de versões com Git.</div>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- Prateleira 4: PROJETOS -->
+
+            <!-- Prateleira 2: PROJETOS (Parte 1) -->
             <section id="projects" class="shelf">
                 <div class="shelf-containers">
                     <div class="food-box">
-                        <h3 class="box-title">Licenciatura</h3>
-                        <div class="box-hidden">Uma plataforma de e-commerce construída com foco em animações e Web Audio API.</div>
+                        <h3 class="box-title" data-i18n="proj_t1">SoundMarket</h3>
+
+                        <div class="box-hidden">
+                            <div class="box-content-split">
+
+                                <div class="box-left">
+                                    <img src="../Anexos/Soundamrket_logo.png" alt="SoundMarket" class="box-image">
+                                </div>
+
+                                <div class="box-right">
+                                    <p data-i18n="proj_d1">Aplicação mobile feita em Kotlin, que serve de marketplace e
+                                        tracker de música em formato físico.</p>
+
+                                    <a href="https://github.com/freir3r/SoundMarket/tree/main" target="_blank"
+                                        class="box-link" data-i18n="btn_github">Ver no GitHub ↗</a>
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
                     <div class="food-box">
-                        <h3 class="box-title">Workshops</h3>
-                        <div class="box-hidden">Aplicação mobile-first para gestão de tarefas com interface drag-and-drop.</div>
+                        <h3 class="box-title" data-i18n="proj_t2">UnityBJJ</h3>
+                        <div class="box-hidden">
+                            <div class="box-content-split">
+                                <div class="box-left">
+                                    <img src="../Anexos/UnityBjjLogo.jpg" alt="UnityBJJ" class="box-image">
+                                </div>
+
+                                <div class="box-right">
+                                    <p data-i18n="proj_d2">Aplicação web para gestão de academia de jiu-jitsu.</p>
+                                    <a href="https://github.com/freir3r/UnityBJJ" target="_blank" class="box-link"
+                                        data-i18n="btn_github">Ver no GitHub ↗</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
                     <div class="food-box">
-                        <h3 class="box-title">Idiomas</h3>
-                        <div class="box-hidden">Um portefólio interativo focado em storytelling e experiências 3D em CSS puro.</div>
+                        <h3 class="box-title" data-i18n="proj_t3">VulnerAI</h3>
+                        <div class="box-hidden">
+                            <div class="box-content-split">
+                                <div class="box-left">
+                                    <img src="../Anexos/VulnerAI_logo.png" alt="VulnerAI" class="box-image">
+                                </div>
+
+                                <div class="box-right">
+                                    <p data-i18n="proj_d3">App web para deteção de vulnerabilidades em redes.</p>
+                                    <a href="https://github.com/freir3r/VulnerAI" target="_blank" class="box-link"
+                                        data-i18n="btn_github">Ver no GitHub ↗</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
-            
-            <!-- Prateleira 5: PERCURSO ACADÉMICO -->
+
+            <!-- Prateleira 3: PROJETOS (Parte 2) -->
+            <section class="shelf">
+                <div class="shelf-containers">
+                    <div class="food-box">
+                        <h3 class="box-title" data-i18n="proj_t4">HandWasher</h3>
+                        
+                        <div class="polaroid-gigante card-1">
+                            <img src="../Anexos/Tartaruga.jpg" alt="Protótipo Tartaruga">
+                        </div>
+                        <div class="polaroid-gigante card-2">
+                            <img src="../Anexos/Mergulhador.png" alt="Protótipo Mergulhador">
+                        </div>
+
+                        <div class="box-hidden">
+                            <p class="texto-passatempos" data-i18n="proj_d4">Projeto feito em colaboração com a SNIPI de oeiras para ajudar crianças com deficiências motoras a aprender a lavar as mãos corretamente.</p>
+                            
+                            <a href="https://github.com/teu-github-handwasher" target="_blank" class="box-link" data-i18n="btn_github">Ver no GitHub ↗</a>
+                        </div>
+                    </div>
+
+                    <div class="food-box">
+                        <h3 class="box-title" data-i18n="proj_t5">Carro πkeno X-34</h3>
+                        
+                        <div class="polaroid-gigante card-1">
+                            <img src="../Anexos/Carro.png" alt="Carro Autónomo">
+                        </div>
+                        <div class="polaroid-gigante card-2">
+                            <img src="../Anexos/Carro2.png" alt="Circuito">
+                        </div>
+
+                        <div class="box-hidden">
+                            <p class="texto-passatempos" data-i18n="proj_d5">Carro autonomo que se desvia de obstáculos.</p>
+                            
+                            <a href="https://github.com/teu-github-carro" target="_blank" class="box-link" data-i18n="btn_github">Ver no GitHub ↗</a>
+                        </div>
+                    </div>
+                    <div class="food-box">
+                        <h3 class="box-title" data-i18n="proj_t6">PSP Lisboa</h3>
+                        <div class="box-hidden">
+                            <div class="box-content-split">
+                                <div class="box-left">
+                                    <img src="../Anexos/PSP_Lisboa_logo.PNG" alt="PSP Lisboa" class="box-image">
+                                </div>
+
+                                <div class="box-right">
+                                    <p data-i18n="proj_d6">App para ajudar a chegar à esquadra mais próxima em Lisboa.</p>
+                                    <a target="_blank" class="box-link" data-i18n="btn_github2">Ver no GitHub ↗</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Prateleira 4: PERCURSO ACADÉMICO -->
             <section id="academic" class="shelf">
                 <div class="shelf-containers">
                     <div class="food-box">
-                        <h3 class="box-title">Contactos</h3>
-                        <div class="box-hidden">Engenharia Informática. Foco em arquitetura de sistemas e algoritmos avançados.</div>
+                        <h3 class="box-title" data-i18n="acad_t1">Licenciatura</h3>
+                        <div class="box-hidden" data-i18n="acad_d1">Engenharia Informática, PBL</div>
                     </div>
                     <div class="food-box">
-                        <h3 class="box-title">Redes</h3>
-                        <div class="box-hidden">Certificação em UI/UX Design e Desenvolvimento Ágil (Scrum).</div>
+                        <h3 class="box-title" data-i18n="acad_t2">Workshops</h3>
+                    <div class="box-hidden" data-i18n="acad_d2">Workshop Git e GitHub. e Solda</div>
                     </div>
                     <div class="food-box">
-                        <h3 class="box-title">Curriculum</h3>
-                        <div class="box-hidden">Português (Nativo) e Inglês (Fluente, certificado C1).</div>
+                        <h3 class="box-title" data-i18n="acad_t3">Idiomas</h3>
+                        <div class="box-hidden" data-i18n="acad_d3">Português (Nativo) e Inglês (B2/C1).</div>
                     </div>
                 </div>
             </section>
+
+            <!-- Prateleira 5: CONTACTOS -->
+            <section id="contacts" class="shelf">
+                <div class="shelf-containers">
+                    <div class="food-box">
+                        <h3 class="box-title" data-i18n="cont_t1">Contactos</h3>
+                        <div class="box-hidden" data-i18n="cont_d1">Email</div>
+                    </div>
+                    <div class="food-box">
+                        <h3 class="box-title" data-i18n="cont_t2">Redes</h3>
+                        <div class="box-hidden" data-i18n="cont_d2">LinkedIn, GitHub</div>
+                    </div>
+                    <div class="food-box">
+                        <h3 class="box-title" data-i18n="cont_t3">Currículo</h3>
+                        <div class="box-hidden" data-i18n="cont_d3">Fazer download do currículo em formato PDF.</div>
+                    </div>
+                </div>
+            </section>
+        </div>
     </div>
 
     <div class="door-wrapper">
@@ -115,33 +221,34 @@
 
             <header>
                 <div class="lang-switcher">
-                    <span class="lang-magnet fi fi-pt active" data-x="0" data-y="0" onclick="mudarIdioma(event, 'pt')"></span>
+                    <span class="lang-magnet fi fi-pt active" data-x="0" data-y="0"
+                        onclick="mudarIdioma(event, 'pt')"></span>
                     <span class="lang-magnet fi fi-gb" data-x="0" data-y="0" onclick="mudarIdioma(event, 'en')"></span>
                 </div>
-                
-<div class="shopping-list">
+
+                <div class="shopping-list">
                     <div class="magnet-pin"></div>
                     <ul class="nav-menu">
                         <li>
                             <a href="#home" class="scroll-link">
                                 <span class="circle"></span>
-                                <span data-i18n="menu_about">Sobre Mim</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#about" class="scroll-link">
-                                <span class="circle"></span>
-                                <span data-i18n="menu_products">Os Meus Projetos</span>
+                                <span data-i18n="menu_home">Início</span>
                             </a>
                         </li>
                         <li>
                             <a href="#projects" class="scroll-link">
                                 <span class="circle"></span>
-                                <span data-i18n="menu_academic">Percurso Académico</span>
+                                <span data-i18n="menu_projects">Os Meus Projetos</span>
                             </a>
                         </li>
                         <li>
                             <a href="#academic" class="scroll-link">
+                                <span class="circle"></span>
+                                <span data-i18n="menu_academic">Percurso Académico</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#contacts" class="scroll-link">
                                 <span class="circle"></span>
                                 <span data-i18n="menu_contact">Contactos</span>
                             </a>
@@ -158,6 +265,7 @@
         </div>
     </div>
 
-<script src="Martim.js"></script>
+    <script src="Martim.js"></script>
 </body>
+
 </html>

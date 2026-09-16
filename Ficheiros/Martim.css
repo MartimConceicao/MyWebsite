@@ -10,42 +10,32 @@ body {
     background-color: var(--bg-world);
     color: var(--text-color);
     font-family: 'Inter', sans-serif;
-    overflow-x: hidden;
+    overflow-x: hidden; 
+    overflow-y: auto; 
     user-select: none;
 }
 
-/* -------------------------
-   MECÂNICA DO FRIGORÍFICO
--------------------------- */
-.door-wrapper {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
-    perspective: 2500px; z-index: 10;
-    pointer-events: none; 
+/*INTERIOR DO FRIGORÍFICO (CÂMARA EM MOVIMENTO)*/
+.fridge-inside {
+    position: relative; width: 100%; min-height: 100vh;
+    overflow: clip;
+    background-color: #e9ecef; 
 }
 
-/* NOVA COR: Cinzento Titânio / Aço Inoxidável Escuro */
-.fridge-door {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(145deg, #6c737c 0%, #4d535b 40%, #31363c 100%);
-    border-right: 15px solid #23272c; 
-    z-index: 2; padding: 40px 60px;
-    display: flex; flex-direction: column; justify-content: space-between;
-    transform-origin: left center; 
+/* 1. A PAREDE DO FUNDO: Cresce com o conteúdo! */
+.fridge-back-wall {
+    position: absolute;
+    top: 0; bottom: 0;
+    left: 12vw; right: 12vw;
+    background-color: #f8f9fa; 
     
-    /* MAGIA AQUI: Aumentamos para 0.8s para a porta parecer "pesada" e abrir devagar */
-    transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); 
+    /* As linhas dos cantos verticais do teu sketch */
+    border-left: 2px solid rgba(0,0,0,0.06); 
+    border-right: 2px solid rgba(0,0,0,0.06); 
     
-    box-shadow: inset 5px 0 15px rgba(255,255,255,0.1), 15px 0 50px rgba(0,0,0,0.6);
-    pointer-events: auto; 
-}
-
-/* Puxador ligeiramente mais claro para contrastar com a porta cinzenta */
-.fridge-handle {
-    position: absolute; right: 40px; top: 50%; transform: translateY(-50%);
-    width: 26px; height: 300px; 
-    background: linear-gradient(to right, #8b929a, #a6adb5, #596068);
-    border-radius: 12px; box-shadow: -8px 5px 15px rgba(0,0,0,0.4), inset 2px 0 5px rgba(255,255,255,0.4);
-    z-index: 5;
+    /* Sombra interna para dar volume aos cantos */
+    box-shadow: inset 20px 0 30px rgba(0,0,0,0.03), inset -20px 0 30px rgba(0,0,0,0.03);
+    z-index: 0;
 }
 
 .fridge-darkness {
@@ -63,32 +53,6 @@ body {
 body.is-lit .fridge-darkness { opacity: 0; }
 body.is-lit .fridge-light-glow { opacity: 1; }
 
-/* -------------------------
-   INTERIOR DO FRIGORÍFICO (CÂMARA EM MOVIMENTO)
--------------------------- */
-.fridge-inside {
-    position: relative; width: 100%; min-height: 100vh;
-    overflow-x: hidden;
-    /* A cor sólida das paredes laterais */
-    background-color: #e9ecef; 
-}
-
-/* 1. A PAREDE DO FUNDO: Cresce com o conteúdo! */
-.fridge-back-wall {
-    position: absolute;
-    top: 0; bottom: 0; /* Acompanha o scroll infinitamente */
-    left: 12vw; right: 12vw;
-    background-color: #f8f9fa; 
-    
-    /* As linhas dos cantos verticais do teu sketch */
-    border-left: 2px solid rgba(0,0,0,0.06); 
-    border-right: 2px solid rgba(0,0,0,0.06); 
-    
-    /* Sombra interna para dar volume aos cantos */
-    box-shadow: inset 20px 0 30px rgba(0,0,0,0.03), inset -20px 0 30px rgba(0,0,0,0.03);
-    z-index: 0;
-}
-
 /* 2. O ESPAÇO DE SCROLL */
 .fridge-content { 
     position: relative; z-index: 5; 
@@ -101,13 +65,10 @@ body.is-lit .fridge-light-glow { opacity: 1; }
     display: flex; flex-direction: column;
 }
 
-/* -------------------------
-   TETO DO FRIGORÍFICO (LUZ E VENTILAÇÃO)
--------------------------- */
+/*TETO DO FRIGORÍFICO (LUZ E VENTILAÇÃO)*/
 .fridge-top-panel {
     width: 100%; max-width: 700px;
     
-    /* Dá 250px de espaço entre o teto e a prateleira Início para a câmara enquadrar bem */
     margin: 0 auto 80px auto; 
     
     background: #f8f9fa;
@@ -121,18 +82,16 @@ body.is-lit .fridge-light-glow { opacity: 1; }
     transform-origin: top center;
 }
 
+.fridge-vents {
+    width: 12%; height: 40px;
+    background: repeating-linear-gradient(180deg, transparent, transparent 5px, rgba(0,0,0,0.15) 5px, rgba(0,0,0,0.15) 9px);
+}
+
 .fridge-led-light {
     width: 60%; height: 60px;
     background: #ffffff;
     border-radius: 8px;
-    /* O foco de luz principal que simula a iluminação do teu frigorífico */
     box-shadow: 0 0 60px rgba(255, 250, 220, 0.9), 0 0 120px rgba(255, 255, 255, 0.7), inset 0 0 20px rgba(255, 250, 200, 1);
-}
-
-.fridge-vents {
-    width: 12%; height: 40px;
-    /* Efeito de grelha de ventilação 3D feito apenas com listras de CSS */
-    background: repeating-linear-gradient(180deg, transparent, transparent 5px, rgba(0,0,0,0.15) 5px, rgba(0,0,0,0.15) 9px);
 }
 
 .shelf {
@@ -143,23 +102,19 @@ body.is-lit .fridge-light-glow { opacity: 1; }
     justify-content: center;
     align-items: flex-end; 
     padding-bottom: 20px; 
-    /* A MAGIA: Cada prateleira tem a sua perspetiva, simulando a tua câmara a passar por elas */
     perspective: 1200px; 
 }
 
-/* 3. A PRATELEIRA DE VIDRO (Cruza a linha vertical) */
+
 /* 3. A PRATELEIRA DE VIDRO (Cruza a linha vertical) */
 .shelf::after {
     content: '';
     position: absolute;
     bottom: 0; 
     
-    /* ALTERAÇÕES AQUI: 
-       Colocamos a largura a 100% para ter a largura exata da parede do fundo,
-       e o left a 0 para não fugir para os lados. */
-    left: 5%; 
-    width: 90%;
-    height: 200px; 
+    left: -7.5%; 
+    width: 115%; 
+    height: 200px;
     
     background: linear-gradient(to bottom, rgba(255,255,255,0.95) 0%, rgba(200,220,240,0.3) 100%);
     border-top: 2px solid rgba(255,255,255,1);
@@ -173,35 +128,13 @@ body.is-lit .fridge-light-glow { opacity: 1; }
     z-index: 1;
 }
 
-/* 4. OS RECIPIENTES DE TEXTO */
-.content-item {
-    background: rgba(255, 255, 255, 0.65);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255,255,255,0.9);
-    border-radius: 12px;
-    padding: 40px;
-    width: 90%;
-    max-width: 600px;
-    box-shadow: 0 25px 35px rgba(0,0,0,0.15), inset 0 0 20px rgba(255,255,255,0.6);
-    text-align: center;
-    position: relative;
-    z-index: 2; 
-    transform: translateY(-20px); 
-    color: #1a1a1a;
-}
-
-.content-item h2 { font-size: 2.5rem; margin-bottom: 15px; color: #111; letter-spacing: -0.5px; }
-.content-item p { font-size: 1.15rem; color: #444; line-height: 1.6; }
-
-/* -------------------------
-   CAIXAS INTERATIVAS (ACRÍLICOS)
--------------------------- */
+/*CAIXAS INTERATIVAS (ACRÍLICOS)*/
 .shelf-containers {
     display: flex; gap: 15px;
     width: 100%; max-width: 850px;
     position: relative; z-index: 2; 
     transform: translateY(-20px);
+    align-items: flex-end;
 }
 
 .food-box {
@@ -212,15 +145,16 @@ body.is-lit .fridge-light-glow { opacity: 1; }
     box-shadow: 0 15px 25px rgba(0,0,0,0.1), inset 0 0 15px rgba(255,255,255,0.6);
     cursor: pointer;
     
-    /* FIXO: Permite à caixa encolher até desaparecer na animação */
-    width: 33.33%; 
-    height: 120px; 
-    min-width: 0; 
+    width: 100%; 
+    min-height: 120px;
     
-    display: flex; flex-direction: column; justify-content: center; align-items: center;
-    overflow: hidden;
+    height: fit-content; 
+    
+    min-width: 0; 
+    display: flex; flex-direction: column; justify-content: flex-start; align-items: center;
+    overflow: visible !important;
     transition: background 0.2s, box-shadow 0.2s;
-    position: relative; /* Para segurar o botão de fechar */
+    position: relative; 
 }
 
 .food-box:hover {
@@ -228,18 +162,23 @@ body.is-lit .fridge-light-glow { opacity: 1; }
     box-shadow: 0 20px 30px rgba(0,0,0,0.15), inset 0 0 20px rgba(255,255,255,0.9);
 }
 
-.food-box.expanded {
-    cursor: default; /* Quando está aberta, tira a mão de pointer */
+.box-title {
+    font-size: 1.4rem; color: #111; 
+    text-align: center; white-space: nowrap; 
+    transition: color 0.2s, margin 0.3s;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
-.box-title {
-    font-size: 1.4rem; color: #111; margin: 0; 
-    text-align: center; white-space: nowrap; transition: color 0.2s;
+/* Quando clicas na caixa e ela abre (ganha a classe expanded) */
+.food-box.expanded .box-title {
+    margin-top: 0;
+    margin-bottom: 10px;
 }
 
 .box-hidden {
     opacity: 0; height: 0; margin-top: 0;
-    color: #444; font-size: 1.05rem; line-height: 1.6; text-align: center;
+    color: #444; font-size: 1.05rem; line-height: 1.6; text-align: justify; white-space: pre-line;
 }
 
 /* NOVO: Botão de fechar (X) gerado via JS */
@@ -248,7 +187,7 @@ body.is-lit .fridge-light-glow { opacity: 1; }
     top: 15px; right: 15px;
     font-size: 26px; font-weight: bold;
     color: #111; cursor: pointer;
-    opacity: 0; pointer-events: none; /* Invisível inicialmente */
+    opacity: 0; pointer-events: none;
     line-height: 1;
     width: 30px; height: 30px;
     display: flex; align-items: center; justify-content: center;
@@ -258,19 +197,177 @@ body.is-lit .fridge-light-glow { opacity: 1; }
 .close-btn:hover { background: rgba(0,0,0,0.15); }
 .food-box.expanded .close-btn { pointer-events: auto; }
 
-/* acaba aqui o css do interior do frigorifico   */
-
-.content-section {
-    min-height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
-    color: #111; text-align: center; padding: 20px;
+/*POLAROIDS GIGANTES FLUTUANTES*/
+.polaroid-gigante {
+    position: absolute;
+    width: 200px;
+    background: #fff;
+    padding: 12px 12px 35px 12px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    border-radius: 4px;
+    z-index: 20;
+    pointer-events: none;
+    opacity: 0;
 }
 
-.content-section h2 { font-size: 3rem; margin-bottom: 20px; color: #2b2e33; }
-.content-section p { font-size: 1.2rem; color: #444; }
+.polaroid-gigante img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    background: #e0e0e0;
+}
 
-/* -------------------------
-   CABEÇALHO E ELEMENTOS
--------------------------- */
+/* Posições iniciais de onde elas vão arrancar */
+.card-1 { top: 20px; left: 20px; }
+.card-2 { bottom: 20px; right: 20px; }
+
+/*TEXTO DA CAIXA (PASSATEMPOS E PROJETOS COM POLAROIDS)*/
+.texto-passatempos {
+    margin-left: 100px; 
+    margin-right: 90px; 
+    padding-right: 15px; 
+}
+
+/*LAYOUT DIVIDIDO DENTRO DAS CAIXAS*/
+.box-content-split {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    text-align: left;
+    width: 100%;
+}
+
+/*LADO ESQUERDO (A Imagem / Poster)*/
+.box-left {
+    flex-shrink: 0;
+    width: 100px; 
+}
+
+.box-left img.box-image {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 6px; 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+
+/*BOTÕES DE LINK (Global - Sempre Centrados)*/
+a.box-link {
+    position: absolute;
+    bottom: 25px; 
+    left: 0;
+    right: 0;
+    margin: 0 auto; 
+    display: block; 
+    width: fit-content; 
+    padding: 8px 16px;
+    background: #111;
+    color: #fff;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: background 0.2s, transform 0.2s;
+    z-index: 10;
+}
+
+a.box-link:hover {
+    background: #333;
+    transform: translateY(-2px);
+}
+
+.box-right p, .box-hidden p {
+    margin-top: 0;
+    margin-bottom: 15px;
+    white-space: pre-line;
+    text-align: justify;
+}
+
+/*SCROLL INTERNO DO TEXTO DAS CAIXAS*/
+.box-hidden p, .box-right p {
+    max-height: 130px; 
+    overflow-y: auto;
+    padding-right: 15px; 
+}
+
+/* O Botão do GitHub fica sempre em baixo, intocável */
+.box-hidden {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* --- ESTILIZAÇÃO DA BARRA DE SCROLL (Scrollbar Elegante) --- */
+.box-hidden p::-webkit-scrollbar, .box-right p::-webkit-scrollbar {
+    width: 6px;
+}
+
+.box-hidden p::-webkit-scrollbar-track, .box-right p::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+}
+
+.box-hidden p::-webkit-scrollbar-thumb, .box-right p::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
+}
+
+.box-hidden p::-webkit-scrollbar-thumb:hover, .box-right p::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+/*PREVENIR DUPLO CLIQUE ACIDENTAL*/
+
+/* 1. Por defeito, o botão é "fantasma" e ignora cliques */
+.food-box a.box-link {
+    pointer-events: none; 
+}
+
+/* 2. Quando a caixa ganha a classe 'expanded' (quando clicas nela)... */
+.food-box.expanded a.box-link {
+    animation: ativarClique 0.6s forwards;
+}
+
+/* 3. A regra da contagem: do início até ao fim da animação não se pode clicar */
+@keyframes ativarClique {
+    0%   { pointer-events: none; }
+    99%  { pointer-events: none; }
+    100% { pointer-events: auto; }
+}
+
+/*acaba aqui o css do interior do frigorifico*/
+
+/*MECÂNICA DO FRIGORÍFICO*/
+.door-wrapper {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+    perspective: 2500px; z-index: 10;
+    pointer-events: none; 
+}
+
+/* NOVA COR: Cinzento Titânio / Aço Inoxidável Escuro */
+.fridge-door {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(145deg, #6c737c 0%, #4d535b 40%, #31363c 100%);
+    border-right: 15px solid #23272c; 
+    z-index: 2; padding: 40px 60px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    transform-origin: left center; 
+    transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); 
+    
+    box-shadow: inset 5px 0 15px rgba(255,255,255,0.1), 15px 0 50px rgba(0,0,0,0.6);
+    pointer-events: auto; 
+}
+
+/* Puxador ligeiramente mais claro para contrastar com a porta cinzenta */
+.fridge-handle {
+    position: absolute; right: 40px; top: 50%; transform: translateY(-50%);
+    width: 26px; height: 300px; 
+    background: linear-gradient(to right, #8b929a, #a6adb5, #596068);
+    border-radius: 12px; box-shadow: -8px 5px 15px rgba(0,0,0,0.4), inset 2px 0 5px rgba(255,255,255,0.4);
+    z-index: 5;
+}
+
+/*CABEÇALHO E ELEMENTOS*/
 header { 
     display: flex; justify-content: space-between; align-items: flex-start; 
     width: 100%; position: relative; z-index: 10; 
@@ -294,12 +391,9 @@ header {
 }
 .lang-magnet.snap-back { transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); }
 
-/* -------------------------
-   LISTA DE COMPRAS
--------------------------- */
+/*LISTA DE COMPRAS*/
 .shopping-list {
     background-color: #fdfdfd; 
-    /* Espaço extra à esquerda para imitar a margem do caderno */
     padding: 25px 30px 25px 45px; 
     position: relative;
     transform: rotate(-1.5deg); 
@@ -307,7 +401,6 @@ header {
     border-radius: 2px;
     margin-top: 20px; margin-right: 40px; 
     
-    /* Efeito de Papel Pautado (Linha vermelha + Linhas azuis horizontais) */
     background-image: 
         linear-gradient(90deg, transparent 32px, #ff9999 32px, #ff9999 33px, transparent 33px),
         repeating-linear-gradient(transparent, transparent 33px, #add8e6 33px, #add8e6 34px);
@@ -326,19 +419,23 @@ header {
     box-shadow: inset -2px -2px 4px rgba(255,255,255,0.3), 2px 3px 4px rgba(0,0,0,0.4);
 }
 
+/* Fundido: as duas definições de .nav-menu / .nav-menu a que existiam foram unidas aqui */
 .nav-menu { 
-    list-style: none; display: flex; flex-direction: column; gap: 14px; 
+    list-style: none; display: flex; flex-direction: column; gap: 8px; 
     margin-top: 10px; 
 }
 
 .nav-menu a { 
-    color: #222; 
-    text-decoration: none; font-size: 15.5px; font-weight: 600; 
+    color: #1a1a1a; 
+    text-decoration: none; font-size: 15px; font-weight: 600; 
     display: flex; align-items: center; gap: 12px;
     transition: all 0.2s;
 }
 
-.nav-menu a:hover { color: #000; }
+.nav-menu a:hover { 
+    color: #000; 
+    text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; 
+}
 
 /* A Bolinha de Checkbox */
 .nav-menu .circle {
@@ -358,7 +455,6 @@ header {
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
     width: 24px; height: 24px;
-    /* Rabisco estilo lápis gerado via SVG transparente */
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23222' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 18 L20 6 M5 6 L18 19' /%3E%3C/svg%3E");
     background-size: 100%;
     background-repeat: no-repeat;
@@ -366,12 +462,8 @@ header {
 }
 
 .nav-menu a:hover .circle {
-    transform: scale(1.1); /* Dá um pequeno "pulo" quando vais riscar */
+    transform: scale(1.1);
 }
-
-.nav-menu { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-.nav-menu a { color: #1a1a1a; text-decoration: none; font-size: 15px; font-weight: 600; transition: all 0.2s; }
-.nav-menu a:hover { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; color: #000; }
 
 .hero-title-container { display: flex; align-items: flex-end; justify-content: flex-start; padding-bottom: 10px; position: relative; z-index: 10; }
 .hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(55px, 11vw, 170px); line-height: 0.88; letter-spacing: 4px; }
@@ -396,7 +488,6 @@ header {
     header { flex-direction: column; gap: 35px; align-items: center; text-align: center; }
     .fridge-handle { right: 20px; width: 18px; height: 200px; }
     .hero-title { letter-spacing: 2px; }
-    .post-it { transform: rotate(0deg); margin-right: 0; }
 }
 @media (max-width: 500px) {
     .fridge-door { padding: 20px 20px; border-right: 8px solid #23272c; }
